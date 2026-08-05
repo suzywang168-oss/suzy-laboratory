@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Suzy Laboratory is an independent product, AI and visual systems lab.">
+  <meta name="theme-color" content="#0a0a0f">
+  <title>Suzy Laboratory</title>
+  <style>
+    :root{
+      --bg:#0a0a0f;--panel:#12121a;--panel-2:#191923;--ink:#f7f4ff;--muted:#aaa5bb;
+      --line:rgba(255,255,255,.12);--accent:#b8a4ff;--accent-2:#ff9ad5;--glow:rgba(184,164,255,.24);
+      --shadow:0 24px 80px rgba(0,0,0,.34);--radius:26px
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:
+      radial-gradient(circle at 15% 15%,rgba(255,154,213,.12),transparent 28%),
+      radial-gradient(circle at 82% 8%,rgba(184,164,255,.18),transparent 28%),
+      radial-gradient(circle at 50% 78%,rgba(109,221,255,.08),transparent 34%);z-index:-2}
+    body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='8' cy='12' r='.7' fill='%23fff'/%3E%3Ccircle cx='74' cy='44' r='.55' fill='%23fff'/%3E%3Ccircle cx='102' cy='92' r='.7' fill='%23fff'/%3E%3Ccircle cx='26' cy='86' r='.45' fill='%23fff'/%3E%3C/svg%3E");z-index:-1}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .shell{width:min(1180px,calc(100% - 40px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:40;padding:18px 0;background:linear-gradient(to bottom,rgba(10,10,15,.96),rgba(10,10,15,.76),transparent);backdrop-filter:blur(18px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);background:rgba(18,18,26,.72);border-radius:999px;padding:8px 10px 8px 16px;box-shadow:0 10px 36px rgba(0,0,0,.2)}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:760;letter-spacing:-.02em}
+    .mark{width:34px;height:34px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,#f7d6ff,#a596ff 55%,#6ae0ff);color:#17121f;box-shadow:0 0 24px var(--glow);font-weight:900}
+    .navlinks{display:flex;align-items:center;gap:4px}
+    .navlinks a{padding:9px 15px;border-radius:999px;color:var(--muted);font-size:14px;font-weight:650;transition:.2s ease}
+    .navlinks a:hover,.navlinks a.active{background:rgba(255,255,255,.08);color:var(--ink)}
+    .hero{min-height:78vh;display:grid;grid-template-columns:1.16fr .84fr;gap:54px;align-items:center;padding:84px 0 72px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:#d8d0e9;background:rgba(255,255,255,.035);font-size:12px;text-transform:uppercase;letter-spacing:.16em}
+    .eyebrow i{width:7px;height:7px;border-radius:50%;background:#b8a4ff;box-shadow:0 0 18px #b8a4ff}
+    h1{font-size:clamp(54px,8.2vw,112px);line-height:.86;margin:26px 0 26px;letter-spacing:-.075em;max-width:850px}
+    h1 span{display:block;color:transparent;background:linear-gradient(105deg,#fff 8%,#c5b5ff 46%,#ff9fd8 82%);background-clip:text;-webkit-background-clip:text}
+    .hero p{max-width:650px;font-size:clamp(17px,2vw,22px);color:var(--muted);margin:0}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+    .btn{height:46px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:0 18px;background:rgba(255,255,255,.045);color:var(--ink);font-weight:720;cursor:pointer;transition:.2s ease}
+    .btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.08)}
+    .btn.primary{background:linear-gradient(135deg,#f1eaff,#b7a4ff);color:#17121f;border-color:transparent;box-shadow:0 14px 36px rgba(184,164,255,.24)}
+    .orbital{position:relative;min-height:460px;display:grid;place-items:center}
+    .planet{width:min(320px,72vw);aspect-ratio:1;border-radius:50%;position:relative;background:
+      radial-gradient(circle at 32% 26%,#fff 0 3%,#e7d6ff 8%,#a290e8 32%,#5d4c95 63%,#181329 100%);box-shadow:inset -40px -42px 72px rgba(0,0,0,.46),0 0 80px rgba(184,164,255,.2);animation:float 7s ease-in-out infinite}
+    .planet:before{content:"";position:absolute;inset:42% -27%;height:17%;border:11px solid rgba(255,214,243,.7);border-left-color:rgba(255,214,243,.2);border-radius:50%;transform:rotate(-14deg);filter:drop-shadow(0 0 14px rgba(255,154,213,.18))}
+    .planet:after{content:"S";position:absolute;inset:0;display:grid;place-items:center;font-size:88px;font-weight:900;letter-spacing:-.08em;color:rgba(255,255,255,.86);text-shadow:0 8px 30px rgba(26,16,51,.42)}
+    .satellite{position:absolute;padding:10px 13px;border:1px solid var(--line);border-radius:14px;background:rgba(18,18,26,.8);backdrop-filter:blur(12px);font-size:12px;color:#d7d1e3;box-shadow:var(--shadow)}
+    .satellite.one{top:12%;left:0}.satellite.two{right:0;bottom:13%}.satellite.three{left:12%;bottom:2%}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-16px) rotate(2deg)}}
+    section{padding:96px 0;scroll-margin-top:90px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:34px}
+    .kicker{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:#c5b8e7;margin-bottom:10px}
+    h2{font-size:clamp(38px,6vw,70px);line-height:.95;letter-spacing:-.055em;margin:0}
+    .section-head p{max-width:520px;color:var(--muted);margin:0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{position:relative;min-height:390px;border:1px solid var(--line);border-radius:var(--radius);padding:24px;overflow:hidden;background:linear-gradient(150deg,rgba(255,255,255,.065),rgba(255,255,255,.02));box-shadow:var(--shadow);transition:.28s ease}
+    .card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.24)}
+    .card:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-90px;top:-95px;background:var(--card-glow,rgba(184,164,255,.18));filter:blur(5px)}
+    .card-index{font-size:12px;color:#d6cde8;letter-spacing:.12em;text-transform:uppercase}
+    .card-visual{height:180px;margin:22px 0;border:1px solid rgba(255,255,255,.11);border-radius:20px;background:linear-gradient(145deg,#27273a,#12121b);position:relative;overflow:hidden}
+    .card-visual:before{content:"";position:absolute;inset:22px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:linear-gradient(160deg,rgba(255,255,255,.08),transparent)}
+    .card-visual:after{content:attr(data-symbol);position:absolute;inset:0;display:grid;place-items:center;font-size:70px;font-weight:900;color:rgba(255,255,255,.82);letter-spacing:-.08em}
+    .card h3{font-size:25px;letter-spacing:-.035em;margin:0 0 8px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+    .tag{font-size:11px;padding:6px 9px;border-radius:999px;border:1px solid var(--line);color:#c8c0d5;background:rgba(255,255,255,.03)}
+    .demo-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}
+    .demo-copy,.demo-screen{border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018));padding:32px;box-shadow:var(--shadow)}
+    .version{display:inline-flex;padding:7px 10px;border-radius:999px;background:#e9e1ff;color:#261f35;font-weight:850;font-size:11px;letter-spacing:.08em}
+    .demo-copy h3{font-size:clamp(32px,4vw,54px);line-height:.98;letter-spacing:-.05em;margin:22px 0 18px}
+    .demo-copy p{color:var(--muted);font-size:16px;max-width:560px}
+    .demo-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:26px 0}
+    .demo-list div{padding:12px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:13px;color:#d4cddd}
+    .demo-screen{min-height:470px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(160deg,#171927,#0c0d14)}
+    .windowbar{height:38px;border:1px solid var(--line);border-radius:13px;display:flex;align-items:center;gap:7px;padding:0 13px}
+    .windowbar i{width:8px;height:8px;border-radius:50%;background:#ff9ad5}.windowbar i:nth-child(2){background:#f7d987}.windowbar i:nth-child(3){background:#8ee0be}
+    .screenbody{flex:1;display:grid;grid-template-columns:110px 1fr;gap:12px}
+    .mocknav,.mockmain{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.035);padding:12px}
+    .mocknav span,.mockmain span{display:block;height:9px;border-radius:9px;background:rgba(255,255,255,.11);margin-bottom:10px}
+    .mocknav span:nth-child(2){width:76%}.mocknav span:nth-child(3){width:62%}.mocknav span:nth-child(5){width:81%}
+    .mockcards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}
+    .mockcards div{height:78px;border-radius:12px;background:linear-gradient(145deg,rgba(184,164,255,.22),rgba(255,255,255,.045));border:1px solid var(--line)}
+    .mocktable{display:grid;gap:7px}.mocktable div{height:32px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06)}
+    .shop-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}
+    .shop-card{min-height:360px;border-radius:30px;border:1px solid var(--line);background:linear-gradient(150deg,rgba(255,154,213,.12),rgba(184,164,255,.05));padding:32px;position:relative;overflow:hidden}
+    .shop-card h3{font-size:42px;letter-spacing:-.05em;margin:0 0 14px}.shop-card p{color:var(--muted);max-width:560px}
+    .cat{position:absolute;right:9%;bottom:-18px;font-size:160px;filter:drop-shadow(0 25px 30px rgba(0,0,0,.35));transform:rotate(-4deg)}
+    .shop-note{border:1px solid var(--line);border-radius:30px;padding:32px;background:rgba(255,255,255,.035);display:flex;flex-direction:column;justify-content:space-between}
+    .shop-note strong{font-size:28px;line-height:1.05;letter-spacing:-.04em}.shop-note p{color:var(--muted)}
+    footer{padding:42px 0 70px;color:var(--muted)}
+    .foot{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:24px;font-size:13px}
+    @media(max-width:900px){.hero,.demo-wrap,.shop-grid{grid-template-columns:1fr}.orbital{min-height:380px}.grid{grid-template-columns:1fr 1fr}.section-head{align-items:flex-start;flex-direction:column}.demo-screen{min-height:380px}}
+    @media(max-width:640px){.shell{width:min(100% - 24px,1180px)}.topbar{padding:10px 0}.nav{border-radius:22px;align-items:flex-start}.brand span:last-child{display:none}.navlinks{gap:0}.navlinks a{padding:9px 10px;font-size:12px}.hero{padding:48px 0 56px;min-height:auto}.grid{grid-template-columns:1fr}.card{min-height:340px}.demo-list{grid-template-columns:1fr}.screenbody{grid-template-columns:78px 1fr}.mockcards{grid-template-columns:1fr}.mockcards div:nth-child(n+2){display:none}.cat{font-size:110px;right:3%}.foot{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="Suzy Laboratory home"><span class="mark">S</span><span>Suzy Laboratory</span></a>
+      <nav class="navlinks" aria-label="Primary navigation">
+        <a href="#orbits">Orbits</a>
+        <a href="#demo">Demo</a>
+        <a href="#lab-shop">Lab Shop</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="shell hero">
+      <div>
+        <span class="eyebrow"><i></i> Independent product laboratory</span>
+        <h1>Ideas with <span>their own gravity.</span></h1>
+        <p>Suzy Laboratory builds product systems, AI workflows and playful digital worlds for film, animation and global storytelling.</p>
+        <div class="hero-actions"><a class="btn primary" href="#demo">Enter the Demo</a><a class="btn" href="#orbits">Explore Orbits</a></div>
+      </div>
+      <div class="orbital" aria-hidden="true">
+        <div class="planet"></div>
+        <span class="satellite one">PRODUCT SYSTEMS</span><span class="satellite two">AI × STORY</span><span class="satellite three">GLOBAL RELEASE</span>
+      </div>
+    </div>
+
+    <section id="orbits">
+      <div class="shell">
+        <div class="section-head"><div><div class="kicker">01 / Selected systems</div><h2>Orbits</h2></div><p>Products circling the same core: turn creative complexity into clear, operable systems.</p></div>
+        <div class="grid">
+          <article class="card" style="--card-glow:rgba(101,218,255,.17)"><span class="card-index">Orbit 01</span><div class="card-visual" data-symbol="P"></div><h3>Painter</h3><p>An AI-native canvas for visual storytelling, node workflows and collaborative production.</p><div class="tags"><span class="tag">Creative AI</span><span class="tag">Canvas</span><span class="tag">Collaboration</span></div></article>
+          <article class="card" style="--card-glow:rgba(184,164,255,.2)"><span class="card-index">Orbit 02</span><div class="card-visual" data-symbol="D"></div><h3>Dip Production Portal</h3><p>A production operating system for localization, voice, video synthesis and delivery pipelines.</p><div class="tags"><span class="tag">Production</span><span class="tag">Localization</span><span class="tag">Workflow</span></div></article>
+          <article class="card" style="--card-glow:rgba(255,154,213,.18)"><span class="card-index">Orbit 03</span><div class="card-visual" data-symbol="D"></div><h3>Dip Admin Portal</h3><p>A control center for partners, content review, distribution, settlement and platform operations.</p><div class="tags"><span class="tag">Admin</span><span class="tag">Distribution</span><span class="tag">Analytics</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="shell">
+        <div class="section-head"><div><div class="kicker">02 / Clickable experiments</div><h2>Demo</h2></div><p>Open the product, click through the workflow and experience the system directly.</p></div>
+        <div class="demo-wrap">
+          <article class="demo-copy">
+            <span class="version">LIVE DEMO · V8.14</span>
+            <h3>Octopus Release User Portal</h3>
+            <p>An AI-powered global short-drama operations workspace spanning content selection, localization, creative production, channel distribution, performance monitoring and risk operations.</p>
+            <div class="demo-list"><div>Channel intelligence</div><div>Content production</div><div>Creative materials</div><div>Global distribution</div><div>Performance dashboards</div><div>Risk monitoring</div></div>
+            <a class="btn primary" href="https://suzywang168-oss.github.io/octopus-release-admin/user-portal/v78/?v=824#/ops/analytics" target="_blank" rel="noopener noreferrer">Launch V8.14 Demo ↗</a>
+          </article>
+          <div class="demo-screen" aria-label="Octopus interface preview">
+            <div class="windowbar"><i></i><i></i><i></i></div>
+            <div class="screenbody"><div class="mocknav"><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="mockmain"><span style="width:42%;height:13px"></span><span style="width:67%"></span><div class="mockcards"><div></div><div></div><div></div></div><div class="mocktable"><div></div><div></div><div></div><div></div><div></div></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lab-shop">
+      <div class="shell">
+        <div class="section-head"><div><div class="kicker">03 / Objects from the lab</div><h2>Lab Shop</h2></div><p>Small artifacts, mascots and collectible objects born from the laboratory’s visual universe.</p></div>
+        <div class="shop-grid"><article class="shop-card"><div class="version">COMING SOON</div><h3>Laboratory<br>Cat Collection</h3><p>A tiny crew of curious cats, each carrying a different creative tool, mood and orbital mission.</p><div class="cat" aria-hidden="true">🐈‍⬛</div></article><aside class="shop-note"><strong>From pixels<br>to pocket objects.</strong><p>Collectibles, stickers, desk objects and limited experiments will land here.</p><a class="btn" href="mailto:suzywang168@gmail.com">Contact the Lab</a></aside></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell foot"><span>© 2026 Suzy Laboratory</span><span>Built for curious humans and ambitious ideas.</span><a href="mailto:suzywang168@gmail.com">suzywang168@gmail.com</a></div></footer>
+  <script>
+    const links=[...document.querySelectorAll('.navlinks a')];
+    const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}})},{rootMargin:'-42% 0px -50%',threshold:0});
+    sections.forEach(section=>observer.observe(section));
+  </script>
+</body>
+</html>
