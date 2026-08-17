@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Suzy Laboratory · Lightweight Telescope Preview</title>
+  <style>
+    :root{
+      --paper:#f4f0eb;
+      --paper-2:#e7e0da;
+      --ink:#665b54;
+      --muted:#8b7f77;
+      --line:rgba(95,82,74,.48);
+      --hair:rgba(95,82,74,.22);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#faf8f5;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    body{display:grid;place-items:center;padding:14px}
+    .panel{
+      width:min(1500px,100%);
+      min-height:min(760px,calc(100vh - 28px));
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 72% 28%,rgba(255,255,255,.68),transparent 34%),
+        radial-gradient(circle at 22% 75%,rgba(255,255,255,.42),transparent 33%),
+        linear-gradient(118deg,var(--paper) 0%,#eee8e2 46%,var(--paper-2) 100%);
+      border:1px solid rgba(92,76,66,.08);
+    }
+    .panel:before{
+      content:"";
+      position:absolute;inset:0;
+      background-image:linear-gradient(rgba(255,255,255,.18),rgba(255,255,255,0));
+      pointer-events:none;
+    }
+    .meta{
+      position:absolute;left:28px;bottom:24px;
+      font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+      color:rgba(73,61,54,.58);
+    }
+    .copy{
+      position:absolute;right:30px;bottom:25px;
+      width:min(260px,38vw);
+      text-align:right;
+      font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;
+      font-size:13px;line-height:1.55;letter-spacing:.03em;
+      color:rgba(76,65,58,.72);
+    }
+    .mark{
+      position:absolute;left:34px;top:30px;
+      display:flex;align-items:center;gap:10px;
+      font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+      color:rgba(83,70,62,.55);
+    }
+    .mark i{width:5px;height:5px;border-radius:50%;background:rgba(95,82,74,.52);box-shadow:0 0 0 5px rgba(95,82,74,.05)}
+    .stage{
+      position:absolute;inset:0;
+      display:grid;place-items:center;
+      transform:translateY(-1.5%);
+    }
+    svg{width:min(520px,46vw);height:auto;overflow:visible}
+    .stroke{fill:none;stroke:var(--line);stroke-width:2.25;stroke-linecap:round;stroke-linejoin:round}
+    .thin{fill:none;stroke:var(--hair);stroke-width:1.2;stroke-linecap:round}
+    .dot{fill:rgba(95,82,74,.36)}
+    .soft{fill:none;stroke:rgba(95,82,74,.13);stroke-width:1}
+    .pulse{transform-origin:260px 260px;animation:float 7s ease-in-out infinite}
+    .orbit{stroke-dasharray:4 9;animation:drift 16s linear infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    @keyframes drift{to{stroke-dashoffset:-52}}
+    @media (max-width:760px){
+      body{padding:0}.panel{min-height:100vh;border:0}
+      svg{width:min(410px,78vw)}
+      .copy{right:18px;bottom:20px;width:220px;font-size:12px}
+      .meta{left:18px;bottom:20px}.mark{left:20px;top:22px}
+    }
+    @media (prefers-reduced-motion:reduce){.pulse,.orbit{animation:none}}
+  </style>
+</head>
+<body>
+  <main class="panel" aria-label="Suzy Laboratory lightweight telescope icon concept">
+    <div class="mark"><i></i> observation / 00</div>
+
+    <div class="stage">
+      <svg viewBox="0 0 520 520" role="img" aria-label="轻量线性望远镜图标">
+        <g class="soft">
+          <path d="M104 317c74-143 215-218 345-186"/>
+          <path d="M78 346c103-97 236-134 355-93"/>
+          <path d="M147 171c90-61 193-75 283-44" class="orbit"/>
+        </g>
+
+        <g>
+          <circle class="dot" cx="117" cy="223" r="2.4"/>
+          <circle class="dot" cx="159" cy="137" r="1.7"/>
+          <circle class="dot" cx="402" cy="174" r="2"/>
+          <circle class="dot" cx="430" cy="306" r="1.6"/>
+          <circle class="dot" cx="92" cy="348" r="1.5"/>
+          <path class="thin" d="M131 257h14M138 250v14"/>
+          <path class="thin" d="M389 214h18M398 205v18"/>
+          <path class="thin" d="M350 337h12M356 331v12"/>
+          <path class="thin" d="M198 111h10M203 106v10"/>
+        </g>
+
+        <g class="pulse">
+          <path class="stroke" d="M183 281l126-91 39 54-126 91z"/>
+          <path class="stroke" d="M306 192l20-15 43 60-20 14"/>
+          <path class="stroke" d="M183 281l-23 17 31 43 23-17"/>
+          <path class="stroke" d="M335 184l16-12 44 61-17 12"/>
+          <circle class="stroke" cx="245" cy="310" r="25"/>
+          <circle class="stroke" cx="245" cy="310" r="7"/>
+          <path class="stroke" d="M245 336v20M233 356h24"/>
+          <path class="stroke" d="M236 356l-41 76M254 356l43 76M245 356v76"/>
+          <path class="thin" d="M169 438h153"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="meta">suzy laboratory / experiment universe</div>
+    <div class="copy">未知不是空白，<br/>而是下一次实验的方向。</div>
+  </main>
+</body>
+</html>
