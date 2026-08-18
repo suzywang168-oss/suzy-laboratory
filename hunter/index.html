@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hunter · Autonomous Growth Agent</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="app">
+<aside class="side"><div class="brand"><div class="logo">H</div><div><b>Hunter</b><span>Autonomous Growth Agent</span></div></div><div class="db"><i></i> Supabase Live · 12 sources</div>
+<nav class="nav">
+<div class="group"><label data-i="overview">总览</label><button class="active" data-page="home" data-short="HOME">首页</button></div>
+<div class="group"><label data-i="discover">发现</label><button data-page="domestic" data-short="CN">国内雷达</button><button data-page="global" data-short="GL">海外雷达</button></div>
+<div class="group"><label data-i="execute">执行</label><button data-page="tasks" data-short="TASK">任务中心</button><button data-page="production" data-short="AI">素材生产</button></div>
+<div class="group"><label data-i="optimize">优化</label><button data-page="strategies" data-short="RULE">策略库</button></div>
+</nav>
+<div class="account"><button id="accountBtn"><div class="avatar" id="avatar">H</div><span><b id="accountName">Guest</b><small style="display:block;color:var(--muted)">Profile</small></span></button></div></aside>
+<main class="main"><header class="top"><div class="search"><input id="search" placeholder="问 Hunter：现在什么正在爆发？"></div><div class="display"><button id="theme">☼</button><button id="lang">中文 / EN</button></div></header>
+<div class="content">
+<section class="page active" id="home"></section>
+<section class="page" id="domestic"></section>
+<section class="page" id="global"></section>
+<section class="page" id="tasks"></section>
+<section class="page" id="production"></section>
+<section class="page" id="strategies"></section>
+</div></main></div>
+<div class="modal" id="huntModal"><div class="dialog"><div class="dh"><div><h2 id="huntTitle">确认 Hunt</h2><div id="huntSub" class="meta"></div></div><button class="btn" data-close="huntModal">×</button></div><div class="dbody" id="huntBody"></div><div class="dfoot"><button class="btn" data-close="huntModal">取消</button><button class="btn primary" id="confirmHunt">确认 Hunt</button></div></div></div>
+<div class="modal" id="profileModal"><div class="dialog"><div class="dh"><h2>Profile</h2><button class="btn" data-close="profileModal">×</button></div><div class="dbody"><div class="form active"><input id="profileName" placeholder="Name"><input id="profileCompany" placeholder="Company"><input id="profileRole" placeholder="Role"></div></div><div class="dfoot"><button class="btn" id="logout">Log out</button><button class="btn primary" id="saveProfile">Save</button></div></div></div>
+<section class="auth" id="auth"><div class="authbox"><h1>Hunter</h1><p>Live workspace backed by Supabase.</p><div class="tabs"><button class="active" data-auth="login">Log in</button><button data-auth="register">Create account</button></div><div class="error" id="authError"></div><form class="form active" id="loginForm"><input id="loginEmail" type="email" placeholder="Email"><input id="loginPassword" type="password" placeholder="Password"><button class="btn primary">Log in</button></form><form class="form" id="registerForm"><input id="regName" placeholder="Name"><input id="regEmail" type="email" placeholder="Email"><input id="regPassword" type="password" placeholder="Password · 8+ characters"><button class="btn primary">Create account</button></form><button class="btn" id="demo" style="width:100%;margin-top:9px">Read-only demo</button></div></section>
+<div class="toast" id="toast"></div>
+<script src="./app.js"></script>
+</body></html>
